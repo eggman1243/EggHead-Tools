@@ -1,0 +1,32 @@
+name: Auto Version Increment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  auto-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Calculate Version from Commits
+        id: version
+        run: |
+          COUNT=$(git log --oneline main -- Tool | wc -l)
+          MAJOR=1
+          MINOR=$COUNT
+          VERSION="$MAJOR.$MINOR"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Update Version File
+        run: |
+          echo "$VERSION" > Version
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add Version
+          git commit -m "Auto-update Version to $VERSION"
+          git push
