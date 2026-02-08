@@ -21,7 +21,6 @@ jobs:
       - name: Calculate Next Version
         id: version
         run: |
-        
           if [ -f Version ]; then
             LAST_VERSION=$(cat Version)
           else
