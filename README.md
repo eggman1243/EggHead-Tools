@@ -1,4 +1,4 @@
 Tools for making your roblox experience better 💻 (:
 
 - Noclip is a bit buggy btw
-- It can clash with other scripts
+- Some of the tools can clash with other scripts
